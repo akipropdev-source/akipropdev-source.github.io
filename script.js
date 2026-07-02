@@ -1,7 +1,7 @@
 // ─── TYPING ANIMATION ────────────────────────────────────────────────────────
 const EMAILJS_PUBLIC_KEY  = '9rs2PEDVJsKNEpGZm';   // ← paste here
-const EMAILJS_SERVICE_ID  = 'service_qtnjvyb';   // ← paste here
-const EMAILJS_TEMPLATE_ID = 'template_y1lk0dh';  // ← paste here
+const EMAILJS_SERVICE_ID  = 'service_qxl0hm7';   // ← paste here
+const EMAILJS_TEMPLATE_ID = 'template_fijzl78';  // ← paste here
 
 const typingText = document.querySelector('.typing-text');
 const words = ['Web Developer', 'Graphic Designer', 'App Developer', 'Tech Enthusiast'];
