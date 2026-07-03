@@ -119,7 +119,7 @@ form.addEventListener('submit', (e) => {
         from_email: email,
         phone: phone,
         subject: subject,
-        message: message
+        message: message 
     }).then(() => {
         showToast(`Thanks ${name}! Your message has been sent.`, 'success');
         form.reset();
