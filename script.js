@@ -1,7 +1,10 @@
-// ─── TYPING ANIMATION ────────────────────────────────────────────────────────
+// ─── TYPING ANIMATION ───────────────────────────────────────────────────────
 const EMAILJS_PUBLIC_KEY  = '9rs2PEDVJsKNEpGZm';   // ← paste here
 const EMAILJS_SERVICE_ID  = 'service_e82qjts';   // ← paste here
 const EMAILJS_TEMPLATE_ID = 'template_fijzl78';  // ← paste here
+
+// Initialize EmailJS
+emailjs.init(EMAILJS_PUBLIC_KEY);
 
 const typingText = document.querySelector('.typing-text');
 const words = ['Web Developer', 'Graphic Designer', 'App Developer', 'Tech Enthusiast'];
@@ -110,13 +113,24 @@ form.addEventListener('submit', (e) => {
         return;
     }
 
-    // Placeholder for real form submission (e.g. EmailJS or Formspree)
-    showToast(`Thanks ${name}! Your message has been sent.`, 'success');
-    form.reset();
+    // Send email using EmailJS
+    emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+        from_name: name,
+        from_email: email,
+        phone: phone,
+        subject: subject,
+        message: message
+    }).then(() => {
+        showToast(`Thanks ${name}! Your message has been sent.`, 'success');
+        form.reset();
+    }).catch((error) => {
+        showToast('Failed to send message. Please try again.', 'error');
+        console.error('EmailJS Error:', error);
+    });
 });
 
 
-// ─── TOAST NOTIFICATION ───────────────────────────────────────────────────────
+// ─── TOAST NOTIFICATION ──────────────────────────────────────────────────────
 
 function showToast(message, type = 'success') {
     const existing = document.querySelector('.toast');
