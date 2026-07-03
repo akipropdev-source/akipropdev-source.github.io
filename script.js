@@ -1,6 +1,6 @@
 // ─── TYPING ANIMATION ────────────────────────────────────────────────────────
 const EMAILJS_PUBLIC_KEY  = '9rs2PEDVJsKNEpGZm';   // ← paste here
-const EMAILJS_SERVICE_ID  = 'service_qxl0hm7';   // ← paste here
+const EMAILJS_SERVICE_ID  = 'service_e82qjts';   // ← paste here
 const EMAILJS_TEMPLATE_ID = 'template_fijzl78';  // ← paste here
 
 const typingText = document.querySelector('.typing-text');
