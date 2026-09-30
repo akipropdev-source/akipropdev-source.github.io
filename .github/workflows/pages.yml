@@ -29,14 +29,7 @@ jobs:
       - name: Upload website files
         uses: actions/upload-pages-artifact@v4
         with:
-          path: |
-            index.html
-            style.css
-            script.js
-            amon.jpg
-            moih.png
-            raz.jpg
-            Amon_Kiprop_CV.pdf.pdf
+          path: .
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v5
