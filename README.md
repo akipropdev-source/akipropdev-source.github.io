@@ -40,10 +40,10 @@ The EmailJS template's **To Email** setting should point to the inbox where you 
 
 ## Deploy with GitHub Pages
 
-This repository is configured as a static website and requires no build step:
+The included GitHub Actions workflow deploys the static site when changes are pushed to `main`. To enable it:
 
 1. Open the repository's **Settings → Pages** on GitHub.
-2. Set the deployment source to the `main` branch and the repository root (`/`).
-3. Save the settings and wait for GitHub Pages to publish the site.
+2. Set the build and deployment source to **GitHub Actions**.
+3. Push a commit to `main`, or run **Deploy portfolio to GitHub Pages** from the **Actions** tab.
 
-After deployment, changes pushed to `main` will be published by GitHub Pages.
+After a successful workflow run, the site is published at <https://akipropdev-source.github.io/>.
