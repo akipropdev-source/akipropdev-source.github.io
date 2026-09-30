@@ -3,8 +3,9 @@ const EMAILJS_PUBLIC_KEY  = '9rs2PEDVJsKNEpGZm';   // ← paste here
 const EMAILJS_SERVICE_ID  = 'service_e82qjts';   // ← paste here
 const EMAILJS_TEMPLATE_ID = 'template_fijzl78';  // ← paste here
 
-// Initialize EmailJS
-emailjs.init(EMAILJS_PUBLIC_KEY);
+if (typeof emailjs !== 'undefined') {
+    emailjs.init(EMAILJS_PUBLIC_KEY);
+}
 
 const typingText = document.querySelector('.typing-text');
 const words = ['Web Developer', 'Graphic Designer', 'App Developer', 'Tech Enthusiast'];
@@ -102,30 +103,43 @@ const form = document.querySelector('.contact form');
 form.addEventListener('submit', (e) => {
     e.preventDefault();
 
-    const name     = form.querySelector('input[type="text"]').value.trim();
-    const email    = form.querySelector('input[type="email"]').value.trim();
-    const phone    = form.querySelector('input[type="number"]').value.trim();
-    const subject  = form.querySelectorAll('input[type="text"]')[1].value.trim();
-    const message  = form.querySelector('textarea').value.trim();
+    const formData = new FormData(form);
+    const name     = formData.get('name').trim();
+    const email    = formData.get('email').trim();
+    const phone    = formData.get('phone').trim();
+    const subject  = formData.get('subject').trim();
+    const message  = formData.get('message').trim();
 
     if (!name || !email || !message) {
         showToast('Please fill in your name, email, and message.', 'error');
         return;
     }
 
-    // Send email using EmailJS
+    if (typeof emailjs === 'undefined') {
+        console.error('EmailJS failed to load; the contact message was not sent.');
+        showToast('The email service is unavailable. Please try again later.', 'error');
+        return;
+    }
+
+    const submitButton = form.querySelector('input[type="submit"]');
+    submitButton.disabled = true;
+    submitButton.value = 'Sending...';
+
     emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
         from_name: name,
         from_email: email,
         phone: phone,
         subject: subject,
-        message: message 
+        message: message
     }).then(() => {
         showToast(`Thanks ${name}! Your message has been sent.`, 'success');
         form.reset();
     }).catch((error) => {
         showToast('Failed to send message. Please try again.', 'error');
         console.error('EmailJS Error:', error);
+    }).finally(() => {
+        submitButton.disabled = false;
+        submitButton.value = 'Send Message';
     });
 });
 
